@@ -2,9 +2,8 @@ name: Build Executables
 
 on:
   push:
-    branches: [ main, master ]  # 添加分支触发条件
     tags:
-      - 'v*'  # 保留标签触发条件
+      - 'v*'  # 只在推送 v 开头的标签时触发
 
 jobs:
   build-windows:
