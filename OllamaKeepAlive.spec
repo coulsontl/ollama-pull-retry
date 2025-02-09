@@ -37,5 +37,5 @@ exe = EXE(
     target_arch=target_arch,  # 仅在需要时通过环境变量指定
     codesign_identity=None,
     entitlements_file=None,
-    icon=None
+    icon=['public\\icon.ico'],
 )
