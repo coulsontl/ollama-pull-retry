@@ -72,6 +72,16 @@ def show_progress(line):
         sys.stdout.flush()
     return None
 
+def extract_model_name(input_text):
+    """从用户输入中提取模型名称"""
+    # 匹配 "ollama run/pull 模型名" 格式
+    match = re.search(r'ollama\s+(run|pull)\s+([^\s]+)', input_text)
+    if match:
+        return match.group(2)  # 返回模型名称部分
+    
+    # 如果不是完整命令，则假设输入的就是模型名称
+    return input_text.strip()
+
 def pull_model(model_name):
     print(f"开始下载模型: {model_name}")
     
@@ -151,7 +161,9 @@ def pull_model(model_name):
 def main():
     clear_console()
     try:
-        model_name = input("请输入需要下载的模型名称: ")
+        user_input = input("请输入需要下载的模型名称: ")
+        model_name = extract_model_name(user_input)
+        print(f"将下载模型: {model_name}")
         return_code = pull_model(model_name)
         
         if return_code == 0:
